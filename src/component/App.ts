@@ -1,30 +1,23 @@
 import { fetchData } from "../util/api.js";
+import { IAppState } from "../util/interface.js";
 
-interface Todo {
-  _id: string;
-  content: string;
-  isCompleted: boolean;
-}
-export interface AppState {
-  todos: Todo[];
-}
 interface This {
-  state: AppState;
-  setState(nextState: AppState): void;
+  state: IAppState;
+  setState(nextState: IAppState): void;
   render(): void;
   $ul: Element;
 }
-export function App(
+export default function App(
   this: This,
   {
     $target,
     initialState,
   }: {
     $target: Element;
-    initialState: AppState;
+    initialState: IAppState;
   }
 ) {
-  this.state = initialState as AppState;
+  this.state = initialState as IAppState;
   this.$ul = document.createElement("ul");
   $target.appendChild(this.$ul);
 

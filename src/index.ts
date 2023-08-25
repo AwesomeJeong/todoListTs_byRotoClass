@@ -1,8 +1,9 @@
-import { App, AppState } from "./component/App.js";
+import App from "./component/App.js";
+import { IAppState } from "./util/interface.js";
 
 async function Main() {
   const $target = document.querySelector("#App");
-  const data: AppState = {
+  const data: IAppState = {
     todos: [],
   };
   console.log($target);
