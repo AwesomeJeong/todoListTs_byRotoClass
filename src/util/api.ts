@@ -29,4 +29,9 @@ export const fetchData = {
       method: "PUT",
     });
   },
+  delete: function (id: string) {
+    return request(`${END_POINT}/${userName}/${id}`, {
+      method: "DELETE",
+    });
+  },
 };

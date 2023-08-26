@@ -52,6 +52,14 @@ export default function App(this: IThis, { $target, initialState }: IProps) {
         alert(e);
       }
     },
+    onRemove: async (id: string) => {
+      try {
+        await fetchData.delete(id);
+        getData();
+      } catch (e) {
+        alert(e);
+      }
+    },
   });
 
   getData();
