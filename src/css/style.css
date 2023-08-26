@@ -30,6 +30,13 @@
   font-weight: 600;
   background-color: #ccc;
 }
+.fav-label {
+  cursor: pointer;
+}
+.fav-button {
+  border: none;
+  background-color: transparent;
+}
 .todo-form {
   position: relative;
 }

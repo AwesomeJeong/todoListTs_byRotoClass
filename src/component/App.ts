@@ -41,13 +41,26 @@ export default function App(this: IThis, { $target, initialState }: IProps) {
     userList.setState({
       users: this.state.users,
       selectedUser: this.state.selectedUser,
+      favoriteUsers: this.state.favoriteUsers,
+      isShowFav: this.state.isShowFav,
     });
   };
 
   const getData = async () => {
     const data = await fetchData.get(this.state.selectedUser);
-    const userData = await fetchData.getUsers();
-    this.setState({ ...this.state, todos: data, users: userData });
+    const userData: string[] = await fetchData.getUsers();
+    const favoritesList = userData.map((user) => {
+      return {
+        name: user,
+        isFav: false,
+      };
+    });
+    this.setState({
+      ...this.state,
+      todos: data,
+      users: userData,
+      favoriteUsers: favoritesList,
+    });
   };
 
   const toTop = new (ToTop as any)({
@@ -59,6 +72,8 @@ export default function App(this: IThis, { $target, initialState }: IProps) {
     initialState: {
       users: this.state.users,
       selectedUser: this.state.selectedUser,
+      favoriteUsers: this.state.favoriteUsers,
+      isShowfav: this.state.isShowFav,
     },
     onClick: (name: string) => {
       this.setState({

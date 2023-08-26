@@ -4,9 +4,15 @@ export interface ITodo {
   isCompleted: boolean;
 }
 
+interface IFavoritUser {
+  name: string;
+  isFav: boolean;
+}
 export interface IUser {
-  users: [];
+  users: string[];
   selectedUser: string;
+  favoriteUsers: IFavoritUser[];
+  isShowFav: boolean;
 }
 
 export interface IAppState extends IUser {

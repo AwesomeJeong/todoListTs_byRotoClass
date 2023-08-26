@@ -8,6 +8,8 @@ async function Main() {
     loading: false,
     users: [],
     selectedUser: "wonjun",
+    favoriteUsers: [],
+    isShowFav: true,
   };
   new (App as any)({ $target, initialState: data });
 }
