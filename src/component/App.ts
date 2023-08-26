@@ -50,6 +50,10 @@ export default function App(this: IThis, { $target, initialState }: IProps) {
     this.setState({ ...this.state, todos: data, users: userData });
   };
 
+  const toTop = new (ToTop as any)({
+    $target,
+  });
+
   const userList = new (UserList as any)({
     $target: this.$sectionUser,
     initialState: {

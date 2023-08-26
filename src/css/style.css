@@ -1,6 +1,11 @@
 #App {
   display: flex;
 }
+.App-top {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+}
 .user,
 .todo {
   width: 50%;
