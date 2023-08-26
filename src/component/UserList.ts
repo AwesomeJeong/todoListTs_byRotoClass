@@ -26,6 +26,7 @@ export default function UserList(
 
   this.render = () => {
     this.$div.innerHTML = `
+      <div><strong>${this.state.selectedUser}</strong>의 todo-list</div>
       <ul class="user-list">
         ${this.state.users
           .map((user) => {
@@ -40,9 +41,7 @@ export default function UserList(
               >${user}</li>`;
           })
           .join("")}
-      </ul>
-      <div>${this.state.selectedUser}의 todo-list</div>
-    
+      </ul>    
     `;
   };
 

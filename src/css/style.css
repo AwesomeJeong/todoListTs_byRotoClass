@@ -1,10 +1,25 @@
+#App {
+  display: flex;
+}
+.user,
+.todo {
+  width: 50%;
+}
 .user-list {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
 }
 .user-item {
   cursor: pointer;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  padding: 4px;
+  margin: 2px;
 }
 .user-item:hover {
-  color: green;
+  color: mediumvioletred;
 }
 .user-item-selected {
   font-weight: 600;

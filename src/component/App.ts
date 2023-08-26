@@ -10,15 +10,27 @@ import UserList from "./UserList.js";
 interface IThis {
   state: IAppState;
   setState(nextState: IAppState): void;
+  $sectionUser: HTMLElement;
+  $sectionTodo: HTMLElement;
 }
 
 interface IProps {
-  $target: Element;
+  $target: HTMLElement;
   initialState: IAppState;
 }
 
 export default function App(this: IThis, { $target, initialState }: IProps) {
   this.state = initialState as IAppState;
+
+  // user, todo 영역 분리
+  this.$sectionUser = document.createElement("section");
+  this.$sectionUser.className = "user";
+  this.$sectionTodo = document.createElement("section");
+  this.$sectionTodo.className = "todo";
+
+  $target.appendChild(this.$sectionUser);
+  $target.appendChild(this.$sectionTodo);
+  // 영역 분리 끝
 
   this.setState = (nextState) => {
     this.state = nextState;
@@ -38,7 +50,7 @@ export default function App(this: IThis, { $target, initialState }: IProps) {
   };
 
   const userList = new (UserList as any)({
-    $target,
+    $target: this.$sectionUser,
     initialState: {
       users: this.state.users,
       selectedUser: this.state.selectedUser,
@@ -46,7 +58,7 @@ export default function App(this: IThis, { $target, initialState }: IProps) {
   });
 
   const todoInput = new (TodoInput as any)({
-    $target,
+    $target: this.$sectionTodo,
     onInput: async (text: string) => {
       try {
         if (text.trim() !== "") {
@@ -69,17 +81,17 @@ export default function App(this: IThis, { $target, initialState }: IProps) {
   });
 
   const loading = new (Loading as any)({
-    $target,
+    $target: this.$sectionTodo,
     initialState: this.state.loading,
   });
 
   const todoCount = new (TodoCount as any)({
-    $target,
+    $target: this.$sectionTodo,
     initialState: this.state.todos,
   });
 
   const todoList = new (TodoList as any)({
-    $target,
+    $target: this.$sectionTodo,
     initialState: this.state.todos,
     onToggle: async (id: string) => {
       try {
