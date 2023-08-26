@@ -5,6 +5,7 @@ import TodoCount from "./TodoCount.js";
 
 import TodoInput from "./TodoInput.js";
 import TodoList from "./TodoList.js";
+import UserList from "./UserList.js";
 
 interface IThis {
   state: IAppState;
@@ -24,12 +25,19 @@ export default function App(this: IThis, { $target, initialState }: IProps) {
     todoList.setState(this.state.todos);
     todoCount.setState(this.state.todos);
     loading.setState(this.state.loading);
+    userList.setState(this.state.users);
   };
 
   const getData = async () => {
     const data = await fetchData.get();
-    this.setState({ ...this.state, todos: data });
+    const userData = await fetchData.getUsers();
+    this.setState({ ...this.state, todos: data, users: userData });
   };
+
+  const userList = new (UserList as any)({
+    $target,
+    initialState: this.state.users,
+  });
 
   const todoInput = new (TodoInput as any)({
     $target,

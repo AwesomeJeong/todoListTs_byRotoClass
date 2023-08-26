@@ -34,4 +34,7 @@ export const fetchData = {
       method: "DELETE",
     });
   },
+  getUsers: function () {
+    return request(`${END_POINT}/users`);
+  },
 };

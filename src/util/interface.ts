@@ -6,5 +6,6 @@ export interface ITodo {
 
 export interface IAppState {
   todos: ITodo[];
-  loading?: boolean;
+  loading: boolean;
+  users: string[];
 }

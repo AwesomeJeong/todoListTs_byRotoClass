@@ -6,6 +6,7 @@ async function Main() {
   const data: IAppState = {
     todos: [],
     loading: false,
+    users: [],
   };
   new (App as any)({ $target, initialState: data });
 }
