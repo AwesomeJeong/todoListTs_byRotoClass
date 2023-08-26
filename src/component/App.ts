@@ -44,6 +44,14 @@ export default function App(this: IThis, { $target, initialState }: IProps) {
   const todoList = new (TodoList as any)({
     $target,
     initialState: this.state.todos,
+    onToggle: async (id: string) => {
+      try {
+        await fetchData.put(id);
+        getData();
+      } catch (e) {
+        alert(e);
+      }
+    },
   });
 
   getData();

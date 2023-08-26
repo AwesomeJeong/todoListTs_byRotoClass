@@ -24,4 +24,9 @@ export const fetchData = {
       }),
     });
   },
+  put: function (id: string) {
+    return request(`${END_POINT}/${userName}/${id}/toggle`, {
+      method: "PUT",
+    });
+  },
 };
