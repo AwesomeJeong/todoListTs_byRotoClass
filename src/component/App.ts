@@ -1,5 +1,6 @@
 import { fetchData } from "../util/api.js";
 import { IAppState } from "../util/interface.js";
+import TodoCount from "./TodoCount.js";
 
 import TodoInput from "./TodoInput.js";
 import TodoList from "./TodoList.js";
@@ -20,6 +21,7 @@ export default function App(this: IThis, { $target, initialState }: IProps) {
   this.setState = (nextState) => {
     this.state = nextState;
     todoList.setState(nextState.todos);
+    todoCount.setState(nextState.todos);
   };
 
   const getData = async () => {
@@ -39,6 +41,11 @@ export default function App(this: IThis, { $target, initialState }: IProps) {
         alert(e);
       }
     },
+  });
+
+  const todoCount = new (TodoCount as any)({
+    $target,
+    initialState: this.state.todos,
   });
 
   const todoList = new (TodoList as any)({
