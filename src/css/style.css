@@ -1,3 +1,15 @@
+.user-list {
+}
+.user-item {
+  cursor: pointer;
+}
+.user-item:hover {
+  color: green;
+}
+.user-item-selected {
+  font-weight: 600;
+  background-color: #ccc;
+}
 .todo-form {
   position: relative;
 }

@@ -26,11 +26,21 @@ export default function UserList(
 
   this.render = () => {
     this.$div.innerHTML = `
-      ${this.state.users
-        .map((user) => {
-          return `<li data-name='${user}'>${user}</li>`;
-        })
-        .join("")}
+      <ul class="user-list">
+        ${this.state.users
+          .map((user) => {
+            return `
+              <li 
+                data-name='${user}'
+                ${
+                  user === this.state.selectedUser
+                    ? "class='user-item user-item-selected'"
+                    : "class='user-item'"
+                }
+              >${user}</li>`;
+          })
+          .join("")}
+      </ul>
       <div>${this.state.selectedUser}의 todo-list</div>
     
     `;
