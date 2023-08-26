@@ -10,6 +10,7 @@ interface IProps {
 
 export default function TodoInput(this: IThis, { $target, onInput }: IProps) {
   this.$form = document.createElement("form");
+  this.$form.className = "todo-form";
   $target.appendChild(this.$form);
 
   this.render = () => {

@@ -1,5 +1,6 @@
 import { fetchData } from "../util/api.js";
 import { IAppState } from "../util/interface.js";
+import Loading from "./Loading.js";
 import TodoCount from "./TodoCount.js";
 
 import TodoInput from "./TodoInput.js";
@@ -20,8 +21,9 @@ export default function App(this: IThis, { $target, initialState }: IProps) {
 
   this.setState = (nextState) => {
     this.state = nextState;
-    todoList.setState(nextState.todos);
-    todoCount.setState(nextState.todos);
+    todoList.setState(this.state.todos);
+    todoCount.setState(this.state.todos);
+    loading.setState(this.state.loading);
   };
 
   const getData = async () => {
@@ -34,13 +36,27 @@ export default function App(this: IThis, { $target, initialState }: IProps) {
     onInput: async (text: string) => {
       try {
         if (text.trim() !== "") {
+          this.setState({
+            ...this.state,
+            loading: true,
+          });
           await fetchData.post(text);
           getData();
         }
       } catch (e) {
         alert(e);
+      } finally {
+        this.setState({
+          ...this.state,
+          loading: false,
+        });
       }
     },
+  });
+
+  const loading = new (Loading as any)({
+    $target,
+    initialState: this.state.loading,
   });
 
   const todoCount = new (TodoCount as any)({
@@ -53,18 +69,36 @@ export default function App(this: IThis, { $target, initialState }: IProps) {
     initialState: this.state.todos,
     onToggle: async (id: string) => {
       try {
+        this.setState({
+          ...this.state,
+          loading: true,
+        });
         await fetchData.put(id);
         getData();
       } catch (e) {
         alert(e);
+      } finally {
+        this.setState({
+          ...this.state,
+          loading: false,
+        });
       }
     },
     onRemove: async (id: string) => {
       try {
+        this.setState({
+          ...this.state,
+          loading: true,
+        });
         await fetchData.delete(id);
         getData();
       } catch (e) {
         alert(e);
+      } finally {
+        this.setState({
+          ...this.state,
+          loading: false,
+        });
       }
     },
   });

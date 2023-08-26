@@ -5,6 +5,7 @@ async function Main() {
   const $target = document.querySelector("#App");
   const data: IAppState = {
     todos: [],
+    loading: false,
   };
   new (App as any)({ $target, initialState: data });
 }
