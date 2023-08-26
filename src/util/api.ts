@@ -13,4 +13,15 @@ export const fetchData = {
   get: function () {
     return request(`${END_POINT}/${userName}`);
   },
+  post: function (text: string) {
+    return request(`${END_POINT}/${userName}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        content: text,
+      }),
+    });
+  },
 };
