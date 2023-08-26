@@ -43,11 +43,11 @@ export default function TodoList(
   this.render = () => {
     if (this.state.length > 0) {
       const htmls = this.state.map((todo) => {
-        return `<li data-id='${todo._id}'><span>${
+        return `<li data-id='${todo._id}' class='todo-item'><span>${
           todo.isCompleted ? `<s>${todo.content}</s>` : todo.content
         }</span><button type='button' class='todo-remove'>X</button></li>`;
       });
-      this.$div.innerHTML = `<ul>${htmls.join("")}</ul>`;
+      this.$div.innerHTML = `<ul class='todo-list'>${htmls.join("")}</ul>`;
     } else {
       this.$div.innerHTML = `<div>할 일을 추가해주세요.</div>`;
     }

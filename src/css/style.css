@@ -1,0 +1,10 @@
+.todo-list {
+  list-style: square;
+}
+.todo-item {
+  cursor: pointer;
+  margin-bottom: 4px;
+}
+.todo-item:hover {
+  color: orangered;
+}
