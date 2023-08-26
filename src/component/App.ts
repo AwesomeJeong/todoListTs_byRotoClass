@@ -25,18 +25,24 @@ export default function App(this: IThis, { $target, initialState }: IProps) {
     todoList.setState(this.state.todos);
     todoCount.setState(this.state.todos);
     loading.setState(this.state.loading);
-    userList.setState(this.state.users);
+    userList.setState({
+      users: this.state.users,
+      selectedUser: this.state.selectedUser,
+    });
   };
 
   const getData = async () => {
-    const data = await fetchData.get();
+    const data = await fetchData.get(this.state.selectedUser);
     const userData = await fetchData.getUsers();
     this.setState({ ...this.state, todos: data, users: userData });
   };
 
   const userList = new (UserList as any)({
     $target,
-    initialState: this.state.users,
+    initialState: {
+      users: this.state.users,
+      selectedUser: this.state.selectedUser,
+    },
   });
 
   const todoInput = new (TodoInput as any)({
@@ -48,7 +54,7 @@ export default function App(this: IThis, { $target, initialState }: IProps) {
             ...this.state,
             loading: true,
           });
-          await fetchData.post(text);
+          await fetchData.post(text, this.state.selectedUser);
           getData();
         }
       } catch (e) {
@@ -81,7 +87,7 @@ export default function App(this: IThis, { $target, initialState }: IProps) {
           ...this.state,
           loading: true,
         });
-        await fetchData.put(id);
+        await fetchData.put(id, this.state.selectedUser);
         getData();
       } catch (e) {
         alert(e);
@@ -98,7 +104,7 @@ export default function App(this: IThis, { $target, initialState }: IProps) {
           ...this.state,
           loading: true,
         });
-        await fetchData.delete(id);
+        await fetchData.delete(id, this.state.selectedUser);
         getData();
       } catch (e) {
         alert(e);

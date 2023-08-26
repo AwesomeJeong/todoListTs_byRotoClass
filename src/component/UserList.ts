@@ -1,12 +1,14 @@
+import { IUser } from "../util/interface";
+
 interface IProps {
   $target: HTMLElement;
-  initialState: string[];
+  initialState: IUser;
 }
 interface IThis {
-  state: string[];
-  setState: (nextState: string[]) => void;
+  state: IUser;
+  setState: (nextState: IUser) => void;
   render: () => void;
-  $ul: HTMLElement;
+  $div: HTMLElement;
 }
 
 export default function UserList(
@@ -14,8 +16,8 @@ export default function UserList(
   { $target, initialState }: IProps
 ) {
   this.state = initialState;
-  this.$ul = document.createElement("ul");
-  $target.appendChild(this.$ul);
+  this.$div = document.createElement("div");
+  $target.appendChild(this.$div);
 
   this.setState = (nextState) => {
     this.state = nextState;
@@ -23,11 +25,15 @@ export default function UserList(
   };
 
   this.render = () => {
-    this.$ul.innerHTML = this.state
-      .map((state) => {
-        return `<li data-name='${state}'>${state}</li>`;
-      })
-      .join("");
+    this.$div.innerHTML = `
+      ${this.state.users
+        .map((user) => {
+          return `<li data-name='${user}'>${user}</li>`;
+        })
+        .join("")}
+      <div>${this.state.selectedUser}의 todo-list</div>
+    
+    `;
   };
 
   this.render();

@@ -7,6 +7,7 @@ async function Main() {
     todos: [],
     loading: false,
     users: [],
+    selectedUser: "wonjun",
   };
   new (App as any)({ $target, initialState: data });
 }

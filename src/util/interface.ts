@@ -4,8 +4,12 @@ export interface ITodo {
   isCompleted: boolean;
 }
 
-export interface IAppState {
+export interface IUser {
+  users: [];
+  selectedUser: string;
+}
+
+export interface IAppState extends IUser {
   todos: ITodo[];
   loading: boolean;
-  users: string[];
 }

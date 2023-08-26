@@ -1,5 +1,4 @@
 const END_POINT = "https://todo-api.roto.codes";
-const userName = "wonjun";
 
 async function request(urls: string, options?: object) {
   const res = await fetch(urls, options);
@@ -10,11 +9,11 @@ async function request(urls: string, options?: object) {
 }
 
 export const fetchData = {
-  get: function () {
-    return request(`${END_POINT}/${userName}`);
+  get: function (selectedUser: string) {
+    return request(`${END_POINT}/${selectedUser}`);
   },
-  post: function (text: string) {
-    return request(`${END_POINT}/${userName}`, {
+  post: function (text: string, selectedUser: string) {
+    return request(`${END_POINT}/${selectedUser}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -24,13 +23,13 @@ export const fetchData = {
       }),
     });
   },
-  put: function (id: string) {
-    return request(`${END_POINT}/${userName}/${id}/toggle`, {
+  put: function (id: string, selectedUser: string) {
+    return request(`${END_POINT}/${selectedUser}/${id}/toggle`, {
       method: "PUT",
     });
   },
-  delete: function (id: string) {
-    return request(`${END_POINT}/${userName}/${id}`, {
+  delete: function (id: string, selectedUser: string) {
+    return request(`${END_POINT}/${selectedUser}/${id}`, {
       method: "DELETE",
     });
   },
