@@ -3,6 +3,7 @@ import { IUser } from "../util/interface";
 interface IProps {
   $target: HTMLElement;
   initialState: IUser;
+  onClick: (name: string) => void;
 }
 interface IThis {
   state: IUser;
@@ -13,7 +14,7 @@ interface IThis {
 
 export default function UserList(
   this: IThis,
-  { $target, initialState }: IProps
+  { $target, initialState, onClick }: IProps
 ) {
   this.state = initialState;
   this.$div = document.createElement("div");
@@ -23,6 +24,14 @@ export default function UserList(
     this.state = nextState;
     this.render();
   };
+
+  this.$div.addEventListener("click", (event) => {
+    const $li = (event.target as HTMLElement).closest("li");
+    if ($li) {
+      const name = $li.dataset.name;
+      if (name) onClick(name);
+    }
+  });
 
   this.render = () => {
     this.$div.innerHTML = `

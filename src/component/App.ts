@@ -1,6 +1,7 @@
 import { fetchData } from "../util/api.js";
 import { IAppState } from "../util/interface.js";
 import Loading from "./Loading.js";
+import ToTop from "./ToTop.js";
 import TodoCount from "./TodoCount.js";
 
 import TodoInput from "./TodoInput.js";
@@ -54,6 +55,14 @@ export default function App(this: IThis, { $target, initialState }: IProps) {
     initialState: {
       users: this.state.users,
       selectedUser: this.state.selectedUser,
+    },
+    onClick: (name: string) => {
+      this.setState({
+        ...this.state,
+        selectedUser: name,
+        todos: [],
+      });
+      getData();
     },
   });
 
